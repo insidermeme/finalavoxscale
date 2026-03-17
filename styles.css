@@ -1,0 +1,213 @@
+/* ═══ Base ═══ */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ═══ Sidebar scroll animation ═══ */
+@keyframes scrollUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+@keyframes scrollDown {
+    0% {
+        transform: translateY(-50%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.sidebar-scroll {
+    animation: scrollUp 40s linear infinite;
+}
+
+.sidebar-scroll-reverse {
+    animation: scrollDown 35s linear infinite;
+}
+
+.sidebar-scroll:hover,
+.sidebar-scroll-reverse:hover {
+    animation-play-state: paused;
+}
+
+/* ═══ Testimonial Cards ═══ */
+.testimonial-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    transition: border-color 0.3s ease;
+}
+
+.testimonial-card:hover {
+    border-color: rgba(0, 255, 132, 0.2);
+}
+
+.notif-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ═══ VSL Frame ═══ */
+.vsl-frame {
+    background: #111;
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ═══ Play Button Glow ═══ */
+@keyframes highConvertPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 0 15px rgba(0, 255, 68, 0.4), 0 0 30px rgba(0, 255, 68, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 25px rgba(0, 255, 68, 0.8), 0 0 60px rgba(0, 255, 68, 0.4);
+        transform: scale(1.02);
+    }
+}
+
+.vsl-play-btn {
+    animation: highConvertPulse 1.5s ease-in-out infinite;
+    /* Prevent animation pause on hover since we have a group-hover scale effect */
+}
+
+/* ═══ Influencer Cards ═══ */
+.influencer-card {
+    background: rgba(255, 255, 255, 0.02);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.influencer-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 40px rgba(0, 255, 132, 0.1);
+}
+
+/* ═══ Pricing Cards ═══ */
+.pricing-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.3s ease;
+}
+
+.pricing-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.pricing-highlight {
+    border: 2px solid #00ff84 !important;
+    box-shadow: 0 0 40px rgba(0, 255, 132, 0.08);
+}
+
+/* ═══ Bonus Box ═══ */
+.bonus-box {
+    background: rgba(0, 255, 132, 0.04);
+    border: 1px solid rgba(0, 255, 132, 0.1);
+}
+
+/* ═══ Accordion ═══ */
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.accordion-content.open {
+    max-height: 400px;
+}
+
+.accordion-arrow {
+    transition: transform 0.3s ease;
+}
+
+.accordion-open .accordion-arrow {
+    transform: rotate(180deg);
+}
+
+/* ═══ Industry Carousel ═══ */
+.industry-carousel {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* ═══ Fade-in animations ═══ */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ═══ Scrollbar ═══ */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(0, 255, 132, 0.2);
+    border-radius: 2px;
+}
+
+/* ═══ Mobile Hero Background ═══ */
+.mobile-hero-bg {
+    background:
+        url('images/fitness.png') left top / 33% auto no-repeat,
+        url('images/lifestyle.png') center top / 34% auto no-repeat,
+        url('images/model.png') right top / 33% auto no-repeat;
+    opacity: 0.35;
+    filter: blur(1px);
+}
+
+/* ═══ Scrollbar Hide ═══ */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+/* ═══ Mobile: hide sidebars, show testimonials inline ═══ */
+@media (max-width: 1023px) {
+
+    .sidebar-scroll,
+    .sidebar-scroll-reverse {
+        animation: none;
+    }
+
+    .pricing-card .bonus-box {
+        padding: 8px;
+    }
+
+    .pricing-card .bonus-box p,
+    .pricing-card .bonus-box li {
+        font-size: 9px;
+    }
+
+    .pricing-card button.text-neon {
+        font-size: 11px;
+        margin-bottom: 12px;
+    }
+
+    .pricing-card a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 13px;
+    }
+}
