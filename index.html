@@ -202,9 +202,23 @@
                 </div>
                 <h3 class="text-sm sm:text-lg font-semibold text-white mb-1 sm:mb-2">The Architect</h3>
                 <p class="text-neon text-xs font-bold mb-4 uppercase tracking-wider">Self-Paced System</p>
-                <div class="flex flex-wrap items-center gap-1 sm:gap-3 mb-1">
-                    <span class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-neon">$297</span>
+
+                <!-- Expanded Pricing Block -->
+                <div class="flex flex-col gap-1 mb-6 mt-1">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <span
+                            class="text-red-500 line-through text-2xl sm:text-4xl font-black opacity-90 decoration-[3px]">$497</span>
+                        <span class="text-4xl sm:text-5xl md:text-6xl font-black text-neon">$297</span>
+                    </div>
+
+                    <div
+                        class="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded bg-red-500/10 border border-red-500/30 text-red-500 animate-[pulse_2s_ease-in-out_infinite] shadow-[0_0_10px_rgba(239,68,68,0.15)]">
+                        <span class="text-[9px] font-bold uppercase opacity-90">Ends In:</span>
+                        <span id="countdown-timer" class="font-mono text-[10px] sm:text-xs font-black">2D : 14H :
+                            23M</span>
+                    </div>
                 </div>
+
                 <p class="text-gray-400 text-xs mb-6">• One-time cost</p>
 
                 <ul class="space-y-3 sm:space-y-4 mb-8">
@@ -465,6 +479,26 @@
                 });
             }
         }
+
+        // Psychological Pricing Countdown Trigger
+        document.addEventListener('DOMContentLoaded', () => {
+            const display = document.getElementById('countdown-timer');
+            if (display) {
+                // Set fake end date to 2 days, 14 hours, 23 minutes from now (in seconds)
+                let timer = (2 * 86400) + (14 * 3600) + (23 * 60);
+                const updateDisplay = setInterval(() => {
+                    const days = Math.floor(timer / 86400);
+                    const hours = String(Math.floor((timer % 86400) / 3600)).padStart(2, '0');
+                    const minutes = String(Math.floor((timer % 3600) / 60)).padStart(2, '0');
+
+                    display.textContent = `${days}D : ${hours}H : ${minutes}M`;
+                    if (--timer < 0) {
+                        clearInterval(updateDisplay);
+                        display.textContent = "0D : 00H : 00M";
+                    }
+                }, 1000);
+            }
+        });
     </script>
     <!-- Floating Chat Support Button -->
     <a href="https://t.me/avoxmanager?text=Hey!%20I%20have%20a%20question%20about%20the%20AI%20Influencer%20Blueprint.%20I%20am%20ready%20to%20scale%20my%20own%20AI%20creator"
