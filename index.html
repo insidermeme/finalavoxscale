@@ -215,8 +215,8 @@
                     <div
                         class="inline-flex w-fit items-center gap-1.5 px-2.5 py-1 rounded bg-red-500/10 border border-red-500/30 text-red-500 animate-[pulse_2s_ease-in-out_infinite] shadow-[0_0_10px_rgba(239,68,68,0.15)]">
                         <span class="text-[9px] font-bold uppercase opacity-90">Ends In:</span>
-                        <span id="countdown-timer" class="font-mono text-[10px] sm:text-xs font-black">2D : 14H :
-                            23M</span>
+                        <span id="countdown-timer" class="font-mono text-[10px] sm:text-xs font-black">2D : 11H :
+                            04M</span>
                     </div>
                 </div>
 
@@ -481,22 +481,34 @@
             }
         }
 
-        // Psychological Pricing Countdown Trigger
+        // Psychological Pricing Persistent Countdown
         document.addEventListener('DOMContentLoaded', () => {
             const display = document.getElementById('countdown-timer');
             if (display) {
-                // Set fake end date to 2 days, 14 hours, 23 minutes from now (in seconds)
-                let timer = (2 * 86400) + (14 * 3600) + (23 * 60);
-                const updateDisplay = setInterval(() => {
-                    const days = Math.floor(timer / 86400);
-                    const hours = String(Math.floor((timer % 86400) / 3600)).padStart(2, '0');
-                    const minutes = String(Math.floor((timer % 3600) / 60)).padStart(2, '0');
+                const durationSeconds = (2 * 86400) + (11 * 3600) + (4 * 60); // 2D 11H 4M
+                let endTime = localStorage.getItem('avoxOfferEndTime');
 
-                    display.textContent = `${days}D : ${hours}H : ${minutes}M`;
-                    if (--timer < 0) {
+                if (!endTime || (Date.now() / 1000) > parseInt(endTime)) {
+                    // Start new countdown if none exists or if it already expired
+                    endTime = (Date.now() / 1000) + durationSeconds;
+                    localStorage.setItem('avoxOfferEndTime', endTime);
+                }
+
+                const updateDisplay = setInterval(() => {
+                    let now = Date.now() / 1000;
+                    let remaining = Math.max(0, parseInt(endTime) - now);
+
+                    if (remaining <= 0) {
                         clearInterval(updateDisplay);
                         display.textContent = "0D : 00H : 00M";
+                        return;
                     }
+
+                    const days = Math.floor(remaining / 86400);
+                    const hours = String(Math.floor((remaining % 86400) / 3600)).padStart(2, '0');
+                    const minutes = String(Math.floor((remaining % 3600) / 60)).padStart(2, '0');
+
+                    display.textContent = `${days}D : ${hours}H : ${minutes}M`;
                 }, 1000);
             }
         });
